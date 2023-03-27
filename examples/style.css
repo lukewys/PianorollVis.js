@@ -1,0 +1,177 @@
+body {
+  margin: 0;
+  padding: 0;
+  /*设置了全部内容的居中*/
+  /*text-align: center;*/
+  /*overflow: hidden;*/
+  /*width: 100vw;*/
+  /*background: #141E30;*/
+  /*background: linear-gradient(to bottom, #243B55, #141E30);*/
+  /*color: white;*/
+  /*font-family: 'Poppins', sans-serif;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  touch-action: manipulation; /* disable double-tap zoom */
+  overscroll-behavior-y: none;
+}
+
+html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+[disabled] { pointer-events: none; opacity: 0.3; }
+
+.background {
+  width: 100vw;
+  height: 100vh; 
+  /*background: #141E30;*/
+  /*background: linear-gradient(to bottom, #243B55, #141E30);*/
+}
+
+.red { background: #EE2B29; fill: #EE2B29; }
+.orange { background: #ff9800; fill: #ff9800; }
+.yellow { background: #ffff00; fill: #ffff00; }
+.green { background: #c6ff00; fill: #c6ff00; }
+.cyan { background: #00e5ff; fill: #00e5ff; }
+.blue { background: #2979ff; fill: #2979ff; }
+.purple { background: #651fff; fill: #651fff; }
+.meta { background: #d500f9; fill: #d500f9; }
+
+canvas {
+  position: absolute;
+  /*top: 0;*/
+  /*left: 0;*/
+  right: 0;
+  bottom: 0;
+}
+
+#svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#svg rect {
+  transition: all 0.2s linear;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 60px;
+  position: absolute;
+  left: 400px;
+  top: 200px;
+}
+
+p {
+  font-size: 20px;
+  position: absolute;
+  left: 400px;
+  top: 330px;
+}
+
+.splash a:link, a:visited {
+  /*color: #CDF352;*/
+  color: white;
+}
+.splash-main b {
+  /*background: #CDF352;*/
+  /*color: black;*/
+  background: white;
+  color: #252525;
+  padding: 0 4px;
+}
+
+.splash {
+  color: white;
+  /*font-family: 'Poppins', sans-serif;*/
+  font-family: cursive;
+  width: 100vw;
+  height: 100vh;
+  /*background: #141E30;*/
+  /*background: linear-gradient(to bottom, #243B55, #141E30);*/
+  background: #252525;
+  background: linear-gradient(300deg, #999999, #252525);
+  font-size: 16px;
+  padding: 20px;
+  line-height: 1.5;
+  /*width: 100%;*/
+  /*max-width: 700px;*/
+  overflow: auto;
+}
+
+button.splash-button {
+  position: absolute;
+  left: 400px;
+  top: 450px;
+  cursor: pointer;
+  margin: 40px auto;
+  padding: 14px;
+  font-family: inherit;
+  font-size: 22px;
+  display: block;
+  /*border: 2px solid #CDF352;*/
+  border: 2px solid white;
+  border-radius: 4px;
+  background-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  /*color: #CDF352;*/
+  color: white;
+  text-align: center;
+  transition: background-color 0.2s linear;
+  width: 200px;
+}
+
+button.splash-button:hover {
+  /*background-color: #CDF352;*/
+  /*color: black;*/
+  background-color: white;
+  color: #252525;
+}
+
+button.splash-button.small {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.splash-button.loading span {
+  animation: pulsing-fade 1.2s ease-in-out infinite;
+}
+@keyframes pulsing-fade { 
+  50% { opacity: 0.3; }
+}
+
+/*button at the middle*/
+/*.debug {*/
+/*  position: relative;*/
+/*  text-align: center;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  z-index: 9999;*/
+/*  transform: translate(0, -100%);*/
+/*}*/
+
+/*.debug-button {*/
+/*  display: inline-block;*/
+/*  !*top: 500px;*!*/
+/*  margin-right: 50px;*/
+/*  background: #9CE7D9;*/
+/*  color: black;*/
+/*  font-family: cursive;*/
+/*  padding: 6px 12px;*/
+/*  border: none;*/
+/*  border-radius: 4px;*/
+/*  font-size: 18px;*/
+/*  font-weight: bold;*/
+/*  cursor: pointer;*/
+/*  !*make sure it's on top*!*/
+/*}*/

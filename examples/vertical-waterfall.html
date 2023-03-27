@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" href="logo-min.png" type="image/x-icon" >
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
+    <script src="https://unpkg.com/tone"></script>
+    <script src="https://unpkg.com/@tonejs/midi"></script>
+    <script src="../Tonejs-Instruments.js"></script>
+    <script src="../note_visualization.js"></script>
+</head>
+<body>
+
+<div class="splash">
+    <h1>vertical-waterfall</h1>
+    <div class="splash-main">
+        <p>An example of vertical-waterfall style</p>
+        <button class="splash-button loading" id="playBtn" disabled onclick="showMainScreen()" autofocus><span>Loading...</span>
+        </button>
+    </div>
+</div>
+
+<div class="loaded" hidden>
+    <div class="background"></div>
+<!--    <svg id="svg"></svg>-->
+<!--    <canvas id="canvas"></canvas>-->
+    <div class="debug">
+        <button class="debug-button" onclick="enableMetronome()" id="metronomeBtn"><span>Enable Metronome</span></button>
+        <button class="debug-button" onclick="playMIDI('ode_to_joy.mid')" id="playmidiBtn"><span>PlayMIDI</span></button>
+    </div>
+
+    <script>
+        // let svg = document.querySelector('svg');
+        // let canvas = document.querySelector('canvas');
+        let div = document.querySelector('.loaded');
+        let animationType = 'waterfall';
+        let orientation = 'vertical';
+        let numOctaves = -1;
+        let lowestC = 1; // the lowest C on physical piano is C1. The number can be set from 1-7.
+        let width = -1;
+        let height = -1;
+        let x = 0;
+        let y = 0;
+        const visual = new NoteVisual(div, animationType, orientation, numOctaves, lowestC, width, height, x, y);
+        const drawLoop = new DrawLoop(CONSTANTS.REFRESH_RATE)
+        drawLoop.addDrawFunctionFromVisual(visual);
+        drawLoop.startDrawLoop();
+
+        CYCLE = 0; // Cycle duration for visual animation. 0 for no cycle.
+
+        const debug = document.querySelector('.debug');
+        debug.style.position = 'relative';
+        debug.style.textAlign = 'center';
+        debug.style.alignItems = 'center';
+        debug.style.justifyContent = 'center';
+        debug.style.zIndex = 9999; // make sure buttons are on top of everything
+        debug.style.transform = 'translate(0, -100%)';
+        const debugButton = document.querySelectorAll('.debug-button');
+        for  (let i = 0; i < debugButton.length; i++) {
+            debugButton[i].style.display = 'inline-block';
+            debugButton[i].style.marginRight = "50px";
+            debugButton[i].style.background = "#ff9800";
+            debugButton[i].style.color = "black";
+            debugButton[i].style.fontFamily = "cursive";
+            debugButton[i].style.padding = "6px 12px";
+            debugButton[i].style.border = "none";
+            debugButton[i].style.borderRadius = "4px";
+            debugButton[i].style.fontSize = "18px";
+            debugButton[i].style.fontWeight = "bold";
+            debugButton[i].style.cursor = "pointer";
+        }
+
+    </script>
+    <script src="play_from_midi_input.js"></script>
+
+
+</div>
+
+</body>
+</html>
