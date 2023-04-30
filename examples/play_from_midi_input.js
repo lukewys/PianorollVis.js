@@ -1,5 +1,6 @@
 SampleLibrary.baseUrl = "https://lukewys.github.io/files/tonejs-samples/"; // "../samples/"
-
+let piano_synth
+let metronome
 
 function showMainScreen() {
     document.querySelector('.splash').hidden = true;
@@ -68,6 +69,7 @@ function playMIDI(midiPath) {
     Midi.fromUrl(midiPath).then(midi_file => {
         const midi = JSON.parse(JSON.stringify(midi_file))
         const now = Tone.now();
+        Tone.Transport.start(); // Start the transport timeline when playing a MIDI file
         midi.tracks.forEach(track => {
             track.notes.forEach(note => {
                 piano_synth.triggerAttackRelease(note.name, note.duration, note.time + now, note.velocity)
@@ -94,27 +96,42 @@ let CYCLE_NUM_BEAT = CYCLE > 0 ? CYCLE * 4 : 8;
 let CYCLE_STRING = `${Math.floor(CYCLE_NUM_BEAT / 4)}m`;
 visual.setCycle(CYCLE);
 
-Tone.Transport.start() //需要这个东西才能把Tone.Transport.schedule和triggerAttackRelease对齐，TODO：需要看看是为什么
-
 Tone.Transport.bpm.value = 120;
-const metronome = SampleLibrary.load({
-    instruments: "metronome"
-});
-
-metronome.toDestination();
-
-const piano_synth = SampleLibrary.load({
-    instruments: 'piano'
-});
-
-piano_synth.toDestination();
 
 let metronome_status = false;
 
-new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
-    // Run those functions when everything is loaded.
+function loadPiano() {
+    return new Promise((resolve) => {
+        const piano = SampleLibrary.load({
+            instruments: 'piano',
+            onload: () => {
+                resolve(piano);
+            },
+        });
+    });
+}
+
+function loadMetronome() {
+    return new Promise((resolve) => {
+        const metronome = SampleLibrary.load({
+            instruments: 'metronome',
+            onload: () => {
+                resolve(metronome);
+            },
+        });
+    });
+}
+
+async function initialize() {
+    piano_synth = await loadPiano();
+    piano_synth.toDestination();
+    metronome = await loadMetronome();
+    metronome.toDestination();
+
     console.log('ready!');
     playBtn.textContent = 'Play';
     playBtn.removeAttribute('disabled');
     playBtn.classList.remove('loading');
-});
+}
+
+initialize();
