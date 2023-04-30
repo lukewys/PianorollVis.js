@@ -1,4 +1,4 @@
-SampleLibrary.baseUrl = "../samples/";
+SampleLibrary.baseUrl = "https://lukewys.github.io/files/tonejs-samples/"; // "../samples/"
 
 
 function showMainScreen() {
