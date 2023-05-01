@@ -25,8 +25,8 @@
 
 <div class="loaded" hidden>
     <div class="background"></div>
-<!--    <svg id="svg"></svg>-->
-<!--    <canvas id="canvas"></canvas>-->
+    <!--    <svg id="svg"></svg>-->
+    <!--    <canvas id="canvas"></canvas>-->
     <div class="debug">
         <button class="debug-button" onclick="enableMetronome()" id="metronomeBtn"><span>Enable Metronome</span></button>
         <button class="debug-button" onclick="playMIDI('ode_to_joy.mid')" id="playmidiBtn"><span>PlayMIDI</span></button>
@@ -51,28 +51,54 @@
 
         CYCLE = 2; // Cycle duration for visual animation. 2 bars.
 
-        const debug = document.querySelector('.debug');
-        debug.style.position = 'relative';
-        debug.style.textAlign = 'center';
-        debug.style.alignItems = 'center';
-        debug.style.justifyContent = 'center';
-        debug.style.zIndex = 9999; // make sure
-        // on top of everything
-        debug.style.transform = 'translate(0, -200%)';
-        const debugButton = document.querySelectorAll('.debug-button');
-        for  (let i = 0; i < debugButton.length; i++) {
-            debugButton[i].style.display = 'inline-block';
-            debugButton[i].style.marginRight = "50px";
-            debugButton[i].style.background = "#ff9800";
-            debugButton[i].style.color = "black";
-            debugButton[i].style.fontFamily = "cursive";
-            debugButton[i].style.padding = "6px 12px";
-            debugButton[i].style.border = "none";
-            debugButton[i].style.borderRadius = "4px";
-            debugButton[i].style.fontSize = "18px";
-            debugButton[i].style.fontWeight = "bold";
-            debugButton[i].style.cursor = "pointer";
-        }
+        // const debug = document.querySelector('.debug');
+        // debug.style.position = 'relative';
+        // debug.style.textAlign = 'center';
+        // debug.style.alignItems = 'center';
+        // debug.style.justifyContent = 'center';
+        // debug.style.zIndex = 9999; // make sure the buttons are on top of everything
+        // debug.style.transform = 'translate(0, -200%)';
+        // const debugButton = document.querySelectorAll('.debug-button');
+        // for  (let i = 0; i < debugButton.length; i++) {
+        //     debugButton[i].style.display = 'inline-block';
+        //     debugButton[i].style.marginRight = "50px";
+        //     debugButton[i].style.background = "#ff9800";
+        //     debugButton[i].style.color = "black";
+        //     debugButton[i].style.fontFamily = "cursive";
+        //     debugButton[i].style.padding = "6px 12px";
+        //     debugButton[i].style.border = "none";
+        //     debugButton[i].style.borderRadius = "4px";
+        //     debugButton[i].style.fontSize = "18px";
+        //     debugButton[i].style.fontWeight = "bold";
+        //     debugButton[i].style.cursor = "pointer";
+        // }
+        const buttonContainer = document.querySelector('.debug');
+        buttonContainer.style.position = 'fixed';
+        buttonContainer.style.top = '95%'; // 顶部间距
+        buttonContainer.style.left = '50%'; // 水平居中
+        buttonContainer.style.transform = 'translateX(-50%)'; // 水平居中
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.justifyContent = 'center';
+        buttonContainer.style.alignItems = 'center';
+        buttonContainer.style.marginBottom = '20px';
+        buttonContainer.style.zIndex = '1000';
+
+        // 获取所有 .debug-button 元素并设置样式
+        const debugButtons = document.querySelectorAll('.debug-button');
+        debugButtons.forEach(button => {
+            button.style.marginRight = '50px';
+            button.style.background = '#ff9800';
+            button.style.color = 'black';
+            button.style.fontFamily = 'cursive';
+            button.style.padding = '6px 12px';
+            button.style.border = 'none';
+            button.style.borderRadius = '4px';
+            button.style.fontSize = '18px';
+            button.style.fontWeight = 'bold';
+            button.style.cursor = 'pointer';
+        });
+
+
 
     </script>
     <script src="play_from_midi_input.js"></script>

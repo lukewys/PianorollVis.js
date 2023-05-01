@@ -146,32 +146,6 @@ button.splash-button.small {
 .splash-button.loading span {
   animation: pulsing-fade 1.2s ease-in-out infinite;
 }
-@keyframes pulsing-fade { 
+@keyframes pulsing-fade {
   50% { opacity: 0.3; }
 }
-
-/*button at the middle*/
-/*.debug {*/
-/*  position: relative;*/
-/*  text-align: center;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  z-index: 9999;*/
-/*  transform: translate(0, -100%);*/
-/*}*/
-
-/*.debug-button {*/
-/*  display: inline-block;*/
-/*  !*top: 500px;*!*/
-/*  margin-right: 50px;*/
-/*  background: #9CE7D9;*/
-/*  color: black;*/
-/*  font-family: cursive;*/
-/*  padding: 6px 12px;*/
-/*  border: none;*/
-/*  border-radius: 4px;*/
-/*  font-size: 18px;*/
-/*  font-weight: bold;*/
-/*  cursor: pointer;*/
-/*  !*make sure it's on top*!*/
-/*}*/
