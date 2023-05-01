@@ -113,13 +113,14 @@ class BasePiano {
         return rect;
     }
 
-    makeText(x, y, note, fill, fontSize, fontFamily) {
+    makeText(x, y, note, fill, fontSize, fontFamily, pointerEvents) {
         const text = document.createElementNS(this.svgNS, 'text');
         text.setAttribute('x', x);
         text.setAttribute('y', y);
         text.setAttribute('fill', fill);
         text.setAttribute('font-size', fontSize);
         text.setAttribute('font-family', fontFamily);
+        text.setAttribute('pointer-events', pointerEvents);
         text.textContent = note;
 
         this.svg.appendChild(text);
@@ -288,9 +289,10 @@ class HorizontalPiano extends BasePiano {
             let note = noteList[0] + (o + this.lowestC);
             let fontSize = 14;
             let fontFamily = 'cursive'
+            let pointerEvents = 'none';
             this.makeText(this.config.whiteNoteWidth - 1.6 * fontSize,
                 y + 12 * this.config.blackNoteHeight - (this.config.whiteNarrowNoteHeight - fontSize) / 2 - 1.5,
-                note, 'black', fontSize, fontFamily);
+                note, 'black', fontSize, fontFamily, pointerEvents);
         }
 
         if (this.octaves > 6) {
@@ -500,9 +502,10 @@ class VerticalPiano extends BasePiano {
             // label the C of each octave.
             let note = noteList[0] + (o + this.lowestC);
             let fontSize = 15;
-            let fontFamily = 'cursive'
+            let fontFamily = 'cursive';
+            let pointerEvents = 'none';
             this.makeText(x - 12 * this.config.blackNoteWidth + (this.config.whiteNarrowNoteWidth - 1.3 * fontSize)
-                / 2 + 1, this.config.whiteNoteHeight - 0.5 * fontSize, note, 'black', fontSize, fontFamily);
+                / 2 + 1, this.config.whiteNoteHeight - 0.5 * fontSize, note, 'black', fontSize, fontFamily, pointerEvents);
         }
 
         if (this.octaves > 6) {
