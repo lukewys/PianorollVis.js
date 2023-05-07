@@ -16,7 +16,7 @@ const CONSTANTS = {
 }
 
 //TODO: implement debug flag --> console.log
-export class BasePiano {
+class BasePiano {
     constructor(svg, width = -1, height = -1, x = 1, y = 1, lowestC = 1) {
         this.config = {
             whiteNoteWidth: undefined,
@@ -136,7 +136,7 @@ export class BasePiano {
     }
 }
 
-export class HorizontalPiano extends BasePiano {
+class HorizontalPiano extends BasePiano {
     constructor(svg, width = -1, height = -1, x = 1, y = 1, lowestC = 1) {
         super(svg, width, height, x, y, lowestC);
         this.config = {
@@ -340,7 +340,7 @@ export class HorizontalPiano extends BasePiano {
 
 }
 
-export class VerticalPiano extends BasePiano {
+class VerticalPiano extends BasePiano {
     constructor(svg, width = -1, height = -1, x = 1, y = 1, lowestC = 1) {
         super(svg, width, height, x, y, lowestC);
         this.config = {
@@ -560,7 +560,7 @@ export class VerticalPiano extends BasePiano {
 /*************************
  * Floaty notes
  ************************/
-export class BaseFloatyNotes {
+class BaseFloatyNotes {
     constructor(canvas, width, height, x, y) {
         this.notes = [];  // the notes floating on the screen.
         this.canvas = canvas;
@@ -614,7 +614,7 @@ export class BaseFloatyNotes {
 
 }
 
-export class HorizontalFloatyNotes extends BaseFloatyNotes {
+class HorizontalFloatyNotes extends BaseFloatyNotes {
     constructor(canvas, width, height, x, y) {
         super(canvas, width, height, x, y);
     }
@@ -672,7 +672,7 @@ export class HorizontalFloatyNotes extends BaseFloatyNotes {
     }
 }
 
-export class VerticalFloatyNotes extends BaseFloatyNotes {
+class VerticalFloatyNotes extends BaseFloatyNotes {
     constructor(canvas, width, height, x, y) {
         super(canvas, width, height, x, y);
     }
@@ -731,7 +731,7 @@ export class VerticalFloatyNotes extends BaseFloatyNotes {
     }
 }
 
-export class HorizontalSequencerNotes extends BaseFloatyNotes {
+class HorizontalSequencerNotes extends BaseFloatyNotes {
     constructor(canvas, width, height, x, y) {
         super(canvas, width, height, x, y);
         this.position = 0;
@@ -825,7 +825,7 @@ export class HorizontalSequencerNotes extends BaseFloatyNotes {
     }
 }
 
-export class VerticalSequencerNotes extends BaseFloatyNotes {
+class VerticalSequencerNotes extends BaseFloatyNotes {
     constructor(canvas, width, height, x, y) {
         super(canvas, width, height, x, y);
         this.position = 0;
@@ -921,7 +921,7 @@ export class VerticalSequencerNotes extends BaseFloatyNotes {
     }
 }
 
-export class HorizontalSequencerOverlapNotes extends BaseFloatyNotes {
+class HorizontalSequencerOverlapNotes extends BaseFloatyNotes {
     constructor(canvas, width, height, x, y) {
         super(canvas, width, height, x, y);
         this.position = 0;
@@ -1045,7 +1045,7 @@ export class HorizontalSequencerOverlapNotes extends BaseFloatyNotes {
 
 // Seal piano class and animation class.
 
-export class NoteVisual {
+class NoteVisual {
     constructor(div,
                 animationType = 'waterfall',
                 orientation = 'vertical',
@@ -1163,7 +1163,7 @@ export class NoteVisual {
     //TODO: 把painter的start和stop也放到这里做一个上层的API
 }
 
-export class DrawLoop {
+class DrawLoop {
     constructor(fps = 60) {
         // Limit the refresh rate to 60fps
         //https://stackoverflow.com/questions/19764018/controlling-fps-with-requestanimationframe
