@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Minimal Example for PianorollVis.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
+    <script src="https://lukewys.github.io/PianorollVis.js/note_visualization.js"></script>
+    <style>
+        .red { background: #EE2B29; fill: #EE2B29; }
+        .orange { background: #ff9800; fill: #ff9800; }
+        .yellow { background: #ffff00; fill: #ffff00; }
+        .green { background: #c6ff00; fill: #c6ff00; }
+        .cyan { background: #00e5ff; fill: #00e5ff; }
+        .blue { background: #2979ff; fill: #2979ff; }
+        .purple { background: #651fff; fill: #651fff; }
+        .meta { background: #d500f9; fill: #d500f9; }
+
+        canvas {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="pianoroll"></div>
+
+
+<script>
+    // the div to draw the piano roll
+    let div = document.getElementById('pianoroll');
+    // set the animation type and orientation
+    let animationType = 'waterfall';
+    let orientation = 'horizontal';
+    // the number of octaves to draw. -1 means draw all 7 octaves
+    let numOctaves = -1;
+    // The lowest C on the piano roll. The number can be set from 1-7.
+    let lowestC = 1;
+    // set the width and height of the pianoroll.
+    // -1 means the height of the window
+    let width = -1;
+    let height = -1;
+    // the x,y position of the left top corner of visual panel
+    let x = 0;
+    let y = 0;
+
+    // create a new NoteVisual object for drawing
+    const visual = new NoteVisual(div, animationType, orientation,
+        numOctaves, lowestC, width, height, x, y);
+    // create a new DrawLoop object for animation
+    const drawLoop = new DrawLoop(CONSTANTS.REFRESH_RATE);
+    // add the draw function to the draw loop
+    drawLoop.addDrawFunctionFromVisual(visual);
+    // start the draw loop
+    drawLoop.startDrawLoop();
+
+
+    // Function triggered when WEBMIDI.js is ready
+    function onEnabled() {
+        const mySynth = WebMidi.inputs[0];
+        //display the note name and play the note
+        mySynth.channels[1].addListener("noteon", e => {
+            // for noteOn, just specify note number and color
+            visual.noteOn(e.note.number, 'orange');
+        });
+        mySynth.channels[1].addListener("noteoff", e => {
+            // for noteOff, similarly, specify note number and color
+            visual.noteOff(e.note.number, 'orange');
+        });
+    }
+
+    WebMidi.enable().then(onEnabled).catch(err => alert(err));
+</script>
+
+</body>
+</html>
