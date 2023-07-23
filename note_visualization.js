@@ -43,7 +43,6 @@ class BasePiano {
 
     }
 
-    // 按照note这个id来找到对应的rect元素，把它的active设置为true，class设置为color-${button}
     highlightNote(note, color) {
         // Show the note on the piano roll.
         const rect = this.findNoteRect(note);
@@ -62,16 +61,13 @@ class BasePiano {
 
     }
 
-    // 清除所有rect的active和class
+    // clear all active and class in rect
     clearNote(rect) {
         rect.removeAttribute('active');
         rect.removeAttribute('class');
     }
 
-    // 用html的长方形（Rect）实现的
-    // 输入参数：index是音符的序号（这个是一个自定的属性，之后会通过这个来找每个音符对应的元素），x是音符的x坐标，y是音符的y坐标，
-    // w是音符的宽度，h是音符的高度，fill是音符的颜色，stroke是音符的边框颜色
-    // (x,y)定义了这个长方形的左上角坐标
+    // (x,y) is the coordinate of the upper left corner of the rectangle
     makeRect(index, x, y, w, h, noteSize, fill, stroke) {
         const rect = document.createElementNS(this.svgNS, 'rect');
         rect.setAttribute('data-index', index);
@@ -454,21 +450,15 @@ class VerticalPiano extends BasePiano {
         let y = 0;
         let index = 0;
 
-        // 需要增加键盘设计的思路
+        // Draw keyboard with different key width
         // const blackNoteIndexes = [1, 3, 6, 8, 10];
-        const whiteWideNoteIndexes = [2, 7, 9]; // 被两个黑键夹着的白键
-        const whiteNarrowNoteIndexes = [0, 4, 5, 11]; // 没被黑键夹着的白键
+        const whiteWideNoteIndexes = [2, 7, 9]; // white keys that surrounded by two black keys
+        const whiteNarrowNoteIndexes = [0, 4, 5, 11]; // other white keys
         const noteList = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
         // First draw all the white notes.
         // Pianos start on an A (if we're using all the octaves);
 
-        // This.makeRect: 这里面键盘是用html的长方形（Rect）实现的
-        // 输入参数：index是音符的序号（这个是一个自定的属性，之后会通过这个来找每个音符对应的元素），x是音符的x坐标，y是音符的y坐标，
-        // w是音符的宽度，h是音符的高度，fill是音符的颜色，stroke是音符的边框颜色
-        // (x,y)定义了这个长方形的左上角坐标
-
-        // 如果大于6个octave，就画最左边的两个白键（因为是从A开始，所以白键是A和B）
         if (this.octaves > 6) {
             this.makeRect(0, x, y, this.config.whiteNarrowNoteWidth, this.config.whiteNoteHeight,
                 this.config.blackNoteWidth, 'white', '#141E30');
@@ -482,8 +472,6 @@ class VerticalPiano extends BasePiano {
             index = 3 + (this.lowestC - 1) * CONSTANTS.NOTES_PER_OCTAVE;
             x = 0;
         }
-
-        //用for循环来画所有的白键
 
         // Draw the white notes.
         for (let o = 0; o < this.octaves; o++) {
@@ -509,14 +497,12 @@ class VerticalPiano extends BasePiano {
         }
 
         if (this.octaves > 6) {
-            // 画最右边的一个白键C
             // And an extra C at the end (if we're using all the octaves);
             this.makeRect(index, x, y, this.config.whiteHighestCWidth, this.config.whiteNoteHeight,
                 this.config.blackNoteWidth, 'white', '#141E30');
 
-            // 画多余的黑键。如果大于6个octave，就画最左边的一个黑键（A#）
             // Now draw all the black notes, so that they sit on top.
-            // Pianos start on an A:
+            // Pianos start on an A, if octave > 6, draw the leftmost A and A#
             this.makeRect(1, this.config.whiteNarrowNoteWidth - halfABlackNote, y, this.config.blackNoteWidth,
                 this.config.blackNoteHeight, this.config.blackNoteWidth, 'black');
             index = 4;
@@ -527,7 +513,6 @@ class VerticalPiano extends BasePiano {
             x = 0;
         }
 
-        // 用for循环画所有的黑键
 
         // Draw the black notes.
         for (let o = 0; o < this.octaves; o++) {
@@ -664,7 +649,7 @@ class HorizontalFloatyNotes extends BaseFloatyNotes {
                 note.x += dx;
             }
 
-            //这行是为了在note为off之后，让note的alpha越来越小，也就是做一个fadeout的效果
+            // the alpha of each note is smaller as it goes off the page.
             this.context.globalAlpha = 1 - note.x / this.contextWidth; // fade out as it goes off the page.
             this.context.fillStyle = note.color;
             this.context.fillRect(note.x, note.y, note.width, note.height);
@@ -679,11 +664,7 @@ class VerticalFloatyNotes extends BaseFloatyNotes {
 
     resize(whiteNoteHeight) {
         this.canvas.width = this.contextWidth;
-
-        //原来是这么写的，配合着css的canvas top=60px。不知道为啥。原版在这里对应着pianoroll在离琴键边缘100-60=40px的位置出现，所以有一点点延迟。
-        //this.canvas.height = this.contextHeight = this.contextHeight - whiteNoteHeight - 20;
-
-        //改动后pianoroll就直接在钢琴键盘位置出现了，配合删除css的canvas to
+        //Set the canvas to the right position that is the edge of the pianoroll keyboard
         this.canvas.height = this.contextHeight = this.contextHeight - whiteNoteHeight;
         this.canvas.style.top = `${this.y + whiteNoteHeight}px`;
     }
@@ -706,7 +687,7 @@ class VerticalFloatyNotes extends BaseFloatyNotes {
     }
 
     draw() {
-        const dy = 3; // 这里dy是移动的速度，3px
+        const dy = 3; // the speed of the moving of note, 3px per frame
         this.context.clearRect(0, 0, this.contextWidth, this.contextHeight);
 
         // Remove all the notes that will be off the page;
@@ -740,7 +721,7 @@ class HorizontalSequencerNotes extends BaseFloatyNotes {
         this.refreshRate = CONSTANTS.REFRESH_RATE;
     }
 
-    clear() {//TODO: make this function another name
+    clear() { //TODO: probably make this function another name?
         this.notes = this.notes.filter((note) => note.on);
         this.notes.forEach((note) => {
                 note.x = 0;
@@ -793,7 +774,8 @@ class HorizontalSequencerNotes extends BaseFloatyNotes {
             this.position = (Date.now() - this.startTime) / 1000 % this.cycleSeconds * this.contextWidth /
                 this.cycleSeconds;
 
-            this.context.clearRect(0, 0, this.contextWidth, this.contextHeight); // 这个也会把线条清除掉
+            // clear all the lines and rectangles
+            this.context.clearRect(0, 0, this.contextWidth, this.contextHeight);
 
             this.context.beginPath(); // Start a new path
             this.context.moveTo(this.position, 0); // Move the pen to
@@ -860,11 +842,7 @@ class VerticalSequencerNotes extends BaseFloatyNotes {
 
     resize(whiteNoteHeight) {
         this.canvas.width = this.contextWidth;
-
-        //原来是这么写的，配合着css的canvas top=60px。不知道为啥。原版在这里对应着pianoroll在离琴键边缘100-60=40px的位置出现，所以有一点点延迟。
-        //this.canvas.height = this.contextHeight = this.contextHeight - whiteNoteHeight - 20;
-
-        //改动后pianoroll就直接在钢琴键盘位置出现了，配合删除css的canvas to
+        //Set the canvas to the right position that is the edge of the pianoroll keyboard
         this.canvas.height = this.contextHeight = this.contextHeight - whiteNoteHeight;
         this.canvas.style.top = `${this.y + whiteNoteHeight}px`;
     }
@@ -987,7 +965,8 @@ class HorizontalSequencerOverlapNotes extends BaseFloatyNotes {
             this.position = (Date.now() - this.startTime) / 1000 % this.cycleSeconds * this.contextWidth
                 / this.cycleSeconds;
 
-            this.context.clearRect(0, 0, this.contextWidth, this.contextHeight); // 这个也会把线条清除掉
+            // clear all the lines and rectangles
+            this.context.clearRect(0, 0, this.contextWidth, this.contextHeight);
 
             this.context.globalAlpha = 1.0;
             this.context.beginPath(); // Start a new path
@@ -1103,8 +1082,7 @@ class NoteVisual {
 
     }
 
-    noteOn(noteNumber, color='orange') {
-        //TODO: change color to string
+    noteOn(noteNumber, color = 'orange') {
         const rect = this.piano.highlightNote(noteNumber - CONSTANTS.LOWEST_PIANO_KEY_MIDI_NOTE, color);
         let noteToPaint;
         if (this.orientation === 'horizontal') {
@@ -1160,7 +1138,19 @@ class NoteVisual {
         this.piano.setCycle(cycle);
     }
 
-    //TODO: 把painter的start和stop也放到这里做一个上层的API
+    start() {
+        this.painter.start(); // start the painter animation
+    }
+
+    stop() {
+        this.painter.stop(); // stop the painter animation
+    }
+
+    clear() {
+        this.painter.clear(); // clear the painter animation
+    }
+
+
 }
 
 class DrawLoop {
@@ -1185,11 +1175,11 @@ class DrawLoop {
     startDrawLoop() {
         // The refresh rate of the animation is determined by the refresh rate of the monitor.
         // So in different monitors, the call to window.requestAnimationFrame will have different refresh rates.
+        // After the next line, we will control the refresh rate to be constant.
         window.requestAnimationFrame(() => this.startDrawLoop());
 
 
         // calc elapsed time since last loop
-
         this.now = Date.now();
         let elapsed = this.now - this.then;
 

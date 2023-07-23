@@ -42,7 +42,7 @@ function onEnabledClick() {
         });
 
         key.addEventListener('mouseup', () => {
-        // 获取该琴键元素的音高信息
+        // get the pitch of the note
         index = key.getAttribute('data-index');
         note = pianoNotes[index];
         num = parseInt(index) + 21;
@@ -80,7 +80,7 @@ function enableMetronome() {
         metronomeBtn.textContent = 'Enable Metronome';
         Tone.Transport.stop();
         Tone.Transport.cancel(); //clear all scheduled events
-        visual.painter.stop();
+        visual.stop();
     } else {
         metronome_status = true;
         metronomeBtn.textContent = 'Disable Metronome';
@@ -96,7 +96,7 @@ function enableMetronome() {
             }, CYCLE_STRING, `+0:${i}:0`);
         }
         Tone.Transport.start();
-        visual.painter.start();
+        visual.start();
     }
 }
 
