@@ -11,6 +11,8 @@ This library is built for the frontend visualization of symbolic music interacti
 - [Vertical keyboard, sequencer animation](https://lukewys.github.io/PianorollVis.js/examples/vertical-sequencer.html)
 - [Minimal implementation](https://lukewys.github.io/PianorollVis.js/examples/minimal_example.html)
 
+For the source code, please see [examples](./examples).
+
 ## Usage
 
 The core of this library is [note_visualization.js](./note_visualization.js).
