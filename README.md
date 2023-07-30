@@ -3,7 +3,7 @@
 PianorollVis.js is a JS library with simple API that visualize MIDI notes in pianoroll.
 This library is built for the frontend visualization of symbolic music interaction.
 
-![PianorollVis.js demo](./assets/pianorollvisjsDemo-1.5x.gif)
+![PianorollVis.js demo](./assets/pianorollvisjsDemo-2x.gif)
 
 ## Example demo
 
