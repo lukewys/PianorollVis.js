@@ -110,6 +110,15 @@ Only when the number of octaves is set to 7, a full 88-key piano keyboard will b
   where the playhead locates at the note onset and offset. When the playhead reaches the end of the panel, all notes on
   the panel are cleared and the playhead starts moving from the keyboard again.
 
+## Instrument Synthesis
+
+The [Tonejs-Instruments.js](./Tonejs-Instruments.js) in this repository is for synthesizing instrument sampler based on
+Tonejs.
+The code we use here is adapted from https://github.com/nbrosowsky/tonejs-instruments.
+We host the samples on the [GitHub page](https://github.com/lukewys/lukewys.github.io/tree/master/files/tonejs-samples),
+so you can use the instrument sampler without downloading any additional files. 
+You are free to use other samplers.
+
 ## Acknowledgement
 
 We thank the following awsome libraries and projects for providing reference and inspiration for this project:
@@ -118,3 +127,4 @@ We thank the following awsome libraries and projects for providing reference and
 - [Magenta.js](https://github.com/magenta/magenta-js)
 - [Tone.js](https://tonejs.github.io/)
 - [VexFlow](https://www.vexflow.com/)
+- [tonejs-instruments](https://github.com/nbrosowsky/tonejs-instruments)
