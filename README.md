@@ -129,6 +129,10 @@ You are free to use other samplers.
 
 ## Acknowledgement
 
+This project is developed by JS enthusiasts with little experience in the field. We wholeheartedly welcome anyone to
+provide issues, feedback, or any suggestions to enhance the project, as your support and insights will help improve both
+the library and our learning process.
+
 This project is developed by Yusong Wu, Yi Deng. We would like to thank the support and feedback from Prof. Anna Huang,
 Prof. Chris Donahue, Prof. Jeremy R. Cooperstock, Nithya Shikapur and Jiaju Ma.
 
