@@ -1,5 +1,7 @@
 # PianorollVis.js 🎹🖥️
 
+![PianorollVis.js logo](./assets/logo.jpg)
+
 PianorollVis.js is a JS library with simple API that visualize MIDI notes in pianoroll.
 This library is built for the frontend visualization of symbolic music interaction.
 
@@ -118,10 +120,13 @@ The [Tonejs-Instruments.js](./Tonejs-Instruments.js) in this repository is for s
 Tonejs.
 The code we use here is adapted from https://github.com/nbrosowsky/tonejs-instruments.
 We host the samples on the [GitHub page](https://github.com/lukewys/lukewys.github.io/tree/master/files/tonejs-samples),
-so you can use the instrument sampler without downloading any additional files. 
+so you can use the instrument sampler without downloading any additional files.
 You are free to use other samplers.
 
 ## Acknowledgement
+
+This project is developed by Yusong Wu, Yi Deng. We would like to thank the support and feedback from Prof. Anna Huang,
+Prof. Chris Donahue, Prof. Jeremy R. Cooperstock, Nithya Shikapur and Jiaju Ma.
 
 We thank the following awsome libraries and projects for providing reference and inspiration for this project:
 
