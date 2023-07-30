@@ -1,11 +1,11 @@
 # PianorollVis.js 🎹🖥️
 
-![PianorollVis.js logo](./assets/logo.jpg)
+<img src="./assets/logo.jpg" alt="PianorollVis.js logo" width="50%" />
 
 PianorollVis.js is a JS library with simple API that visualize MIDI notes in pianoroll.
 This library is built for the frontend visualization of symbolic music interaction.
 
-![PianorollVis.js demo](./assets/pianorollvisjsDemo.gif)
+<img src="./assets/pianorollvisjsDemo.gif" alt="PianorollVis.js demo" width="50%" />
 
 ## Example demo
 
